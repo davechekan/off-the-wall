@@ -130,7 +130,7 @@ var offTheWallGame = (function () {
 
   function resetTurn(){
     wallHitCount = [0,0,0,0,0];
-    scoringEnabled = true; //let the ball drop without scoring before first grab;
+    scoringEnabled = false; //prevent cheating by touching the walls while holding the ball!
     currentScore = 0; // start player's turn
     playGrabTone();
   }
@@ -287,6 +287,10 @@ var offTheWallGame = (function () {
       resetTurn();
     });
 
+    Matter.Events.on(mouseConstraint, "enddrag", function () {
+      scoringEnabled = true;
+    });
+    
     render.mouse = mouse;  // keep the mouse in sync with rendering
   }
 

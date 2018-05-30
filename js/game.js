@@ -183,8 +183,9 @@ var offTheWallGame = (function () {
    */
   function wallHit(pair) {
     if (scoringEnabled) {
-      const debounce = pair.timeCreated - lastCollision;
+      let debounce = Math.abs(pair.timeCreated - lastCollision);
       lastCollision = pair.timeCreated;
+
       if (debounce > 0) {
         // make the sound
         playWallTone();

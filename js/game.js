@@ -5,7 +5,6 @@
 * https://davechekan.com/offTheWall
 * Simple ball bouncing game using Matter.js physics engine
 */
-
 (function () {
   
   /** 
@@ -16,7 +15,7 @@
   const GRAVITY = 0.7
   const WALLTHICKNESS = 20;
   const BALLRADIUS = 20;
-  const BALLDENSITY = 0.42;
+  const BALLDENSITY = 0.32;
   const BALLFRICTION = 0.01;
   const BALLAIRFRICTION = 0.00001;
   const BALLBOUNCE = 0.75 //restitution
@@ -24,7 +23,7 @@
   const WALLHITCOLOR = '#66A2B8';
   const WALLCOLOR = ['#334593'];
   const HITTONEFREQUENCY = 30;
-  const MAX_VELOCITY = 100;
+  const MAX_VELOCITY = 30;
  
   let WINDOWHEIGHT = window.innerHeight;
   let WINDOWWIDTH = window.innerWidth;
@@ -208,6 +207,52 @@
         }
       });
     });
+
+    Matter.Events.on(engine,'beforeUpdate',function(){
+      // bring a lost ball back onto the playfield
+      let lost = false;
+      let recover_x,recover_y, recovery_velocity_x, recovery_velocity_y;
+
+      if(ball.position.x < WALLTHICKNESS || isNaN(ball.position.x)){
+        lost = true;
+        recover_x = WALLTHICKNESS + 10;
+        recover_y = ball.positionPrev.y;
+      }
+
+      if(ball.position.x > WINDOWWIDTH){
+        lost = true;
+        recover_x = WINDOWWIDTH - 100;
+        recover_y = ball.positionPrev.y;
+      }
+
+      if(ball.position.y < WALLTHICKNESS || isNaN(ball.position.y)){
+        lost = true;
+        recover_x = ball.positionPrev.x;
+        recover_y = WALLTHICKNESS + 10;
+      }
+
+      if(ball.position.y > WINDOWHEIGHT){
+        lost = true;
+        recover_x = ball.positionPrev.x;
+        recover_y = WINDOWHEIGHT - 100;
+      }
+
+      if (lost){
+        Matter.Body.setStatic(ball,true);
+        Matter.Body.setPosition(ball,{
+          x: recover_x,
+          y: recover_y
+        });
+        Matter.Body.setVelocity(ball,{
+          x:MAX_VELOCITY,
+          y:MAX_VELOCITY
+        })
+        Matter.Body.setStatic(ball,false);
+        lost = false;
+      }
+      
+
+    })
   }
 
   function registerControls() {

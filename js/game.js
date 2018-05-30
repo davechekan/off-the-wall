@@ -23,7 +23,7 @@ var offTheWallGame = (function () {
   const WALLHITCOLOR = '#66A2B8';
   const WALLCOLOR = ['#334593'];
   const HITTONEFREQUENCY = 30;
-  const MAX_VELOCITY = 30;
+  const MAXVELOCITY = 30;
  
   let WINDOWHEIGHT = window.innerHeight;
   let WINDOWWIDTH = window.innerWidth;
@@ -32,8 +32,8 @@ var offTheWallGame = (function () {
   const canvas = document.getElementById('gameBoard');
   const titleScreen = document.getElementById('title-screen');
   const gameScreen = document.getElementById('game-screen');
-  const $currentScore = document.getElementById('current-score');
-  const $highScore = document.getElementById('high-score');
+  const currentScoreTag = document.getElementById('current-score');
+  const highScoreTag = document.getElementById('high-score');
 
   // global game variables
   let currentScore, highScore;
@@ -46,11 +46,13 @@ var offTheWallGame = (function () {
   /** 
    * StartGame Operation
    * Expose public function to start game
-   * TODO: 
+   * TODO: animate or fade transition from title screen to game screen
    */
   return {
     startGame: function() {
 
+      // transition title screen to game screen
+      // TODO: DJC
       titleScreen.style.display = "none";
       gameScreen.style.display = "block";
 
@@ -111,19 +113,19 @@ var offTheWallGame = (function () {
   /** 
    * Scoring
    * Track points and update score board, handle "turns"
-   * TODO: 
+   * TODO: track points per wall
    */
 
   function updateScore(newCurrentScore) {
     currentScore = newCurrentScore;
-    $currentScore.innerText = currentScore;
+    currentScoreTag.innerText = currentScore;
 
     if (highScore >= 0) {
       highScore = (currentScore >= highScore) ? currentScore : highScore;
     } else {
       highScore = 0;
     }
-    $highScore.innerText = highScore;
+    highScoreTag.innerText = highScore;
   }
 
   function resetTurn(){
@@ -226,41 +228,41 @@ var offTheWallGame = (function () {
     Matter.Events.on(engine,'beforeUpdate',function(){
       // bring a lost ball back onto the playfield
       let lost = false;
-      let recover_x,recover_y, recovery_velocity_x, recovery_velocity_y;
+      let recoverX,recoverY;
 
       if(ball.position.x < WALLTHICKNESS || isNaN(ball.position.x)){
         lost = true;
-        recover_x = WALLTHICKNESS + 10;
-        recover_y = ball.positionPrev.y;
+        recoverX = WALLTHICKNESS + 10;
+        recoverY = ball.positionPrev.y;
       }
 
       if(ball.position.x > WINDOWWIDTH){
         lost = true;
-        recover_x = WINDOWWIDTH - 100;
-        recover_y = ball.positionPrev.y;
+        recoverX = WINDOWWIDTH - 100;
+        recoverY = ball.positionPrev.y;
       }
 
       if(ball.position.y < WALLTHICKNESS || isNaN(ball.position.y)){
         lost = true;
-        recover_x = ball.positionPrev.x;
-        recover_y = WALLTHICKNESS + 10;
+        recoverX = ball.positionPrev.x;
+        recoverY = WALLTHICKNESS + 10;
       }
 
       if(ball.position.y > WINDOWHEIGHT){
         lost = true;
-        recover_x = ball.positionPrev.x;
-        recover_y = WINDOWHEIGHT - 100;
+        recoverX = ball.positionPrev.x;
+        recoverY = WINDOWHEIGHT - 100;
       }
 
       if (lost){
         Matter.Body.setStatic(ball,true);
         Matter.Body.setPosition(ball,{
-          x: recover_x,
-          y: recover_y
+          x: recoverX,
+          y: recoverY
         });
         Matter.Body.setVelocity(ball,{
-          x:MAX_VELOCITY,
-          y:MAX_VELOCITY
+          x:MAXVELOCITY,
+          y:MAXVELOCITY
         })
         Matter.Body.setStatic(ball,false);
         lost = false;
@@ -294,7 +296,7 @@ var offTheWallGame = (function () {
    * TODO: resolve playback issues on iOS
    */
   function playWallTone() {
-    var sound = new Pizzicato.Sound({
+    const sound = new Pizzicato.Sound({
       source: 'wave',
       options: {
         type: 'sawtooth',
@@ -313,7 +315,7 @@ var offTheWallGame = (function () {
   }
 
   function playGrabTone() {
-    var sound = new Pizzicato.Sound({
+    const sound = new Pizzicato.Sound({
       source: 'wave',
       options: {
         type: 'sine',
@@ -339,8 +341,4 @@ var offTheWallGame = (function () {
     })
     sound.play();
   }
-
-
-  //start the game
-  //startGame();
 })();

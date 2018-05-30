@@ -5,7 +5,7 @@
 * https://davechekan.com/offTheWall
 * Simple ball bouncing game using Matter.js physics engine
 */
-(function () {
+var offTheWallGame = (function () {
   
   /** 
    * World Variables and Constants
@@ -30,6 +30,8 @@
 
   // HTML elements
   const canvas = document.getElementById('gameBoard');
+  const titleScreen = document.getElementById('title-screen');
+  const gameScreen = document.getElementById('game-screen');
   const $currentScore = document.getElementById('current-score');
   const $highScore = document.getElementById('high-score');
 
@@ -39,6 +41,26 @@
   let scoringEnabled = false; //don't start scoring until first grab
   let lastCollision = 0; // debounce
   let wallHitCount = [0,0,0,0,0];
+
+
+  /** 
+   * StartGame Operation
+   * Expose public function to start game
+   * TODO: 
+   */
+  return {
+    startGame: function() {
+
+      titleScreen.style.display = "none";
+      gameScreen.style.display = "block";
+
+      init();
+      createWalls();
+      createBall();
+      registerControls();
+      registerEvents();
+    }
+  }
   
 
   /** 
@@ -83,14 +105,6 @@
     window.addEventListener('orientationchange', function () {
       //TODO: DJC
     });
-  }
-
-  function startGame() {
-    init();
-    createWalls();
-    createBall();
-    registerControls();
-    registerEvents();
   }
 
 
@@ -250,8 +264,6 @@
         Matter.Body.setStatic(ball,false);
         lost = false;
       }
-      
-
     })
   }
 
@@ -329,5 +341,5 @@
 
 
   //start the game
-  startGame();
+  //startGame();
 })();

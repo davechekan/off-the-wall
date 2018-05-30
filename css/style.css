@@ -29,3 +29,20 @@ body{
     font-size: 24px;
     z-index: -1;
 }
+#game-screen {
+    display: none;
+}
+#title-screen {
+    text-align: center;
+    font-family: sans-serif;
+    color: #666;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25%;
+    margin: auto;
+}
+button {
+    border: 1px solid white;
+    font-size:24px;
+}

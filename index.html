@@ -8,23 +8,34 @@
     <title>Off-The-Wall</title>
     <script type="text/javascript" src="lib/matter.min.js"></script>
     <script type="text/javascript" src="lib/Pizzicato.min.js"></script>
+    
     <link rel="stylesheet" href="css/style.css" >
   </head>
   <body>
-    <div class="score current-score">
-      score
-      <br>
-      <span id="current-score"></span>
+    <div id="title-screen">
+      <h2>Off The Wall</h2>
+      <h4>by Dave Chekan</h4>
+      <div class="start-block">
+          <button id="start-button" type="button" onclick="offTheWallGame.startGame();">Start Game</button>
+      </div>
     </div>
-    <div class="score high-score">
-      high score
-      <br>
-      <span id="high-score"></span>
+
+    <div id="game-screen">
+      <div class="score current-score">
+          score
+          <br />
+          <span id="current-score"></span>
+      </div>
+      <div class="score high-score">
+        high score
+        <br />
+        <span id="high-score"></span>
+      </div>
+      <div class="instructions">
+        grab the ball and see how many walls you can hit in a single throw
+      </div>
+      <canvas id="gameBoard"></canvas>
     </div>
-    <div class="instructions">
-      grab the ball and see how many walls you can hit in a single throw
-    </div>
-    <canvas id="gameBoard"></canvas>
     <script type="text/javascript" src="js/game.js"></script>
   </body>
 </html>

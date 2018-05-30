@@ -6,6 +6,8 @@ Experiment with Matter.js physics engine and Pizzicato audio api. This is my fir
 
 Off-the-Wall attempts to capture the pure joy and fun of bouncing a superball off the walls of an empty room. The gameplay consists of _grabbing_ the ball and throwing it off one of the four walls and trying to hit as many walls as possible before the ball comes to a stop.
 
+![](https://github.com/davechekan/off-the-wall/blob/master/demo.gif?raw=true)
+
 ### Usage
 
 The index.html file can directly be loaded in your browser or you can run the little webserver to ease in testing on mobile browsers.

@@ -16,6 +16,9 @@ The index.html file can directly be loaded in your browser or you can run the li
 
 With mobile phone on same wifi network as computer, visit http://{computer's-ip}:8080
 
+### Demo
+Version 1.0 can be demo'ed at http://thecrunchlab.com/off-the-wall/
+
 ### Libraries Used
 - [Matter.js](https://github.com/liabru/matter-js)
 - [Pizzicato js](https://github.com/alemangui/pizzicato)
@@ -35,3 +38,4 @@ With mobile phone on same wifi network as computer, visit http://{computer's-ip}
 - Different ball materials (with different physics properties)
 - Enemies to hit (earn bonus points)
 - Multiplayer (socket.io connection for players on 2 devices to interact)
+

@@ -34,6 +34,9 @@ Version 1.0 can be demo'ed at http://thecrunchlab.com/off-the-wall/
 
 ### TODOs
 - Change wall color after each hit
+- Improve graphics
+- Add device orientation support for mobile
+- Add tilt support for mobile
 - New levels (different room shapes, other deflecting objects, different gravity and friction)
 - Different ball materials (with different physics properties)
 - Enemies to hit (earn bonus points)

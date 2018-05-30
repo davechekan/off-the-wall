@@ -26,13 +26,11 @@ Version 1.0 can be demo'ed at http://thecrunchlab.com/off-the-wall/
 - [Pizzicato js](https://github.com/alemangui/pizzicato)
 
 ### Known Issues
-- Collision detection failure
- If you throw the ball too hard, it will pass right through a wall
- 
 - No sound on iOS
-
-- Debouncing as ball comes to rest
- As the ball is coming to rest, it will strike the floor hundreds of times. Needs better dampening to not register score
+- ~~Collision detection failure
+ If you throw the ball too hard, it will pass right through a wall~~
+- ~~Debouncing as ball comes to rest
+ As the ball is coming to rest, it will strike the floor hundreds of times. Needs better dampening to not register score~~
 
 ### TODOs
 - Change wall color after each hit
